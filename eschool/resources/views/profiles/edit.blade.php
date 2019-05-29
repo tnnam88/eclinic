@@ -64,12 +64,12 @@ use Intervention\Image\ImageManagerStatic as Image;
                                         {{--start form--}}
                                         <form method="post" action="{{url('/editprofile')}}" enctype="multipart/form-data" id="myForm">
                                             {{csrf_field()}}
-                                            <div class="form-group half first_form">
+                                            <div class="form-group half ">
                                                 <input type="text" name="user_name" style="margin-right: 10px;" placeholder="{{Auth::user()->name}}">
                                                 <label class="control-label" for="input">Change Your Username</label>
                                             </div>
 
-                                            <div class="form-group half first_form">
+                                            <div class="form-group half ">
                                                 <input id="dob" type="date" class="form-control" name="dob" placeholder="{{Auth::user()->dob}}" >
 
                                                 <label class="control-label" for="input">Change Your Date of Birth</label>

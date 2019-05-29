@@ -25,6 +25,9 @@ foreach ($cmtweek as $cmt) {
 <div class="col-lg-3">
     <aside class="sidebar static">
         <div class="widget">
+
+        </div>
+        <div class="widget">
             <h4 class="widget-title">Your page</h4>
             <div class="your-page">
                 <figure>

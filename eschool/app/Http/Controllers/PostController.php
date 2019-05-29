@@ -12,6 +12,9 @@ use App\Comment;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Notification;
+use \Cache;
+use \Log;
+
 
 
 class PostController extends Controller
@@ -24,8 +27,27 @@ class PostController extends Controller
      */
     function index()
     {
+        //test weather
+        $minutes = 60;
+        $forecast = Cache::remember('forecast', $minutes, function () {
+            Log::info("Not from cache");
+            $app_id = config("here.app_id");
+            $app_code = config("here.app_code");
+            $lat = 21.028511;
+            $lng = 	105.804817;
 
-        return view('welcome');
+            $url = "https://weather.api.here.com/weather/1.0/report.json?product=forecast_hourly&latitude=${lat}&longitude=${lng}&oneobservation=true&language=vie&app_id=${app_id}&app_code=${app_code}";
+            Log::info($url);
+            $client = new \GuzzleHttp\Client();
+            $res = $client->get($url);
+            if ($res->getStatusCode() == 200) {
+                $j = $res->getBody();
+                $obj = json_decode($j);
+                $forecast = $obj->hourlyForecasts->forecastLocation;
+            }
+            return $forecast;
+        });
+        return view('welcome',compact('forecast'));
     }
     /**
      * Control ajax  load more post on Home Page

@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Notifications\MailResetPasswordToken;
+use App\Notifications\ResetPasswordRequest;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +10,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
 
-class User extends Authenticatable
+class User extends Authenticatable  implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -44,10 +44,10 @@ class User extends Authenticatable
     /**
      * Send a password reset email to the user
      */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new MailResetPasswordToken($token));
-    }
+//    public function sendPasswordResetNotification($token)
+//    {
+//        $this->notify(new ResetPasswordRequest($token));
+//    }
 
     public function  isOnline()
     {

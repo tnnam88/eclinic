@@ -54,7 +54,7 @@ class ShowProfileController extends Controller
 //                ->orderBy('created_at')
 //                ->get();
 
-        //test weather
+        // weather
             $minutes = 60;
             $forecast = Cache::remember('forecast', $minutes, function () {
                 Log::info("Not from cache");

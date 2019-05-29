@@ -147,6 +147,49 @@
                                     </div><!-- post & cmd -->
 
                                 </div><!-- center-->
+                                <div class="col-lg-3">
+                                    <aside class="sidebar static">
+                                        <div class="widget">
+
+                                            <div class="central-meta">
+                                                <div class="links">
+                                                    {{ $forecast->city }} - {{ $forecast->state }} - {{ $forecast->country }}
+                                                    <br>
+
+                                                    <br>
+                                                    @if (count($forecast->forecast))
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col"></th>
+                                                                <th scope="col">Weather</th>
+                                                                <th scope="col">Hour</th>
+                                                                <th scope="col">Temperature</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @foreach (array_slice($forecast->forecast,0,10) as $f)
+                                                                <tr>
+                                                                    <th scope="row">
+
+                                                                    </th>
+                                                                    <td><img width=24 src="{{ $f->iconLink }}"></td>
+                                                                    <td>{{ Carbon::createFromFormat("HmdY", $f->localTime) }}</td>
+                                                                    <td> {{ $f->temperature }}&deg;</td>
+                                                                </tr>
+
+                                                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    @else
+                                                        <li>Sorry my dear friend, no forecast here.</li>
+                                                    @endif
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </aside>
+                                </div>
                             @include('layouts.rsidebar')<!-- rsidebar -->
                         </div>
                     </div>
